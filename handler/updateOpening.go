@@ -7,6 +7,17 @@ import (
 	"net/http"
 )
 
+// @BasePath /api/v1
+// @Summary Update Opening
+// @Description Update fields of a job opening
+// @Accept json
+// @Produce json
+// @Param id query int true "Opening ID"
+// @Param request body handler.UpdateOpeningRequest true "Request Body"
+// @Success 200 {object} handler.UpdateOpeningResponse
+// @Failure 400 {object} handler.ErrorResponse
+// @Failure 404 {object} handler.ErrorResponse
+// @Router /opening [patch]
 func UpdateOpeningHandler(ctx *gin.Context) {
 	request := UpdateOpeningRequest{}
 
