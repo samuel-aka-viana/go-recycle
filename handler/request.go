@@ -2,6 +2,7 @@ package handler
 
 import (
 	"fmt"
+	"go-project/utils"
 )
 
 func errParamsIsRequired(name, typ string) error {
@@ -39,6 +40,26 @@ func (r *CreateOpeningRequest) Validate() error {
 	}
 	if r.Salary <= 0 {
 		return errParamsIsRequired("salary", "float64")
+	}
+	return nil
+}
+
+// update opening
+
+type UpdateOpeningRequest struct {
+	Role     string  `json:"role"`
+	Company  string  `json:"company"`
+	Location string  `json:"location"`
+	Remote   *bool   `json:"remote"`
+	Link     string  `json:"link"`
+	Salary   float64 `json:"salary"`
+}
+
+func (r *UpdateOpeningRequest) Validate() error {
+
+	changes := utils.StructToMap(r)
+	if len(changes) == 0 {
+		return fmt.Errorf("at leat one valid field must me provided")
 	}
 	return nil
 }
