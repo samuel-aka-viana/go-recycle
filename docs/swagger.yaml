@@ -213,16 +213,81 @@ paths:
     get:
       consumes:
       - application/json
-      description: Get a list of all job openings with pagination
+      description: Get job openings with automatic filtering (Django-style)
       parameters:
       - description: Page number
         in: query
         name: page
         type: integer
-      - description: Number of items per page
+      - description: Items per page
         in: query
         name: pageSize
         type: integer
+      - description: Exact role match
+        in: query
+        name: role
+        type: string
+      - description: Role contains text
+        in: query
+        name: role_contains
+        type: string
+      - description: Exact company
+        in: query
+        name: company
+        type: string
+      - description: Company contains
+        in: query
+        name: company_contains
+        type: string
+      - description: Exact location
+        in: query
+        name: location
+        type: string
+      - description: Location contains
+        in: query
+        name: location_contains
+        type: string
+      - description: Remote work
+        in: query
+        name: remote
+        type: boolean
+      - description: Minimum salary
+        in: query
+        name: salary_min
+        type: integer
+      - description: Maximum salary
+        in: query
+        name: salary_max
+        type: integer
+      - description: Created after (YYYY-MM-DD)
+        in: query
+        name: created_after
+        type: string
+      - description: Created before (YYYY-MM-DD)
+        in: query
+        name: created_before
+        type: string
+      - collectionFormat: csv
+        description: Roles list
+        in: query
+        items:
+          type: string
+        name: roles
+        type: array
+      - collectionFormat: csv
+        description: Companies list
+        in: query
+        items:
+          type: string
+        name: companies
+        type: array
+      - collectionFormat: csv
+        description: Exclude roles
+        in: query
+        items:
+          type: string
+        name: exclude_roles
+        type: array
       produces:
       - application/json
       responses:
@@ -234,5 +299,5 @@ paths:
           description: Internal Server Error
           schema:
             $ref: '#/definitions/handler.ErrorResponse'
-      summary: List Openings
+      summary: List Openings with Filters
 swagger: "2.0"

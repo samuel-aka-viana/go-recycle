@@ -186,14 +186,14 @@ const docTemplate = `{
         },
         "/openings": {
             "get": {
-                "description": "Get a list of all job openings with pagination",
+                "description": "Get job openings with automatic filtering (Django-style)",
                 "consumes": [
                     "application/json"
                 ],
                 "produces": [
                     "application/json"
                 ],
-                "summary": "List Openings",
+                "summary": "List Openings with Filters",
                 "parameters": [
                     {
                         "type": "integer",
@@ -203,8 +203,104 @@ const docTemplate = `{
                     },
                     {
                         "type": "integer",
-                        "description": "Number of items per page",
+                        "description": "Items per page",
                         "name": "pageSize",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "Exact role match",
+                        "name": "role",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "Role contains text",
+                        "name": "role_contains",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "Exact company",
+                        "name": "company",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "Company contains",
+                        "name": "company_contains",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "Exact location",
+                        "name": "location",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "Location contains",
+                        "name": "location_contains",
+                        "in": "query"
+                    },
+                    {
+                        "type": "boolean",
+                        "description": "Remote work",
+                        "name": "remote",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "Minimum salary",
+                        "name": "salary_min",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "Maximum salary",
+                        "name": "salary_max",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "Created after (YYYY-MM-DD)",
+                        "name": "created_after",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "Created before (YYYY-MM-DD)",
+                        "name": "created_before",
+                        "in": "query"
+                    },
+                    {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "collectionFormat": "csv",
+                        "description": "Roles list",
+                        "name": "roles",
+                        "in": "query"
+                    },
+                    {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "collectionFormat": "csv",
+                        "description": "Companies list",
+                        "name": "companies",
+                        "in": "query"
+                    },
+                    {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "collectionFormat": "csv",
+                        "description": "Exclude roles",
+                        "name": "exclude_roles",
                         "in": "query"
                     }
                 ],
